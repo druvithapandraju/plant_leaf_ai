@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Analytics</title>
+    <body class="graph-page">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #dfe9f3, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #388E3C;
+        }
+
+        /* Back button (center bottom) */
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background: #1976D2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #0D47A1;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>🌿 Plant Disease Analytics</h2>
+
+    <div class="btn-group">
+        <button onclick="showYearly()">Yearly</button>
+        <button onclick="showMonthly()">Monthly</button>
+    </div>
+
+    <canvas id="chart"></canvas>
+
+    <!-- ✅ Back Button moved to bottom -->
+    <a href="/" class="back-btn">⬅ Back to Home</a>
+    <!-- Flask version:
+    <a href="{{ url_for('home') }}" class="back-btn">⬅ Back to Home</a>
+    -->
+
+</div>
+
+<script>
+    const ctx = document.getElementById('chart').getContext('2d');
+    let chart;
+
+    const years = ["2018","2019","2020","2021","2022","2023","2024","2025"];
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+    const yearlyDatasets = [
+        {
+            label: "Healthy",
+            data: [30, 35, 40, 38, 42, 45, 50, 48],
+            borderColor: "#4CAF50",
+            backgroundColor: "rgba(76, 175, 80, 0.2)",
+            tension: 0.4
+        },
+        {
+            label: "Early Blight",
+            data: [10, 15, 12, 18, 20, 22, 25, 23],
+            borderColor: "#FF9800",
+            backgroundColor: "rgba(255, 152, 0, 0.2)",
+            tension: 0.4
+        },
+        {
+            label: "Late Blight",
+            data: [5, 8, 6, 10, 12, 15, 18, 16],
+            borderColor: "#F44336",
+            backgroundColor: "rgba(244, 67, 54, 0.2)",
+            tension: 0.4
+        },
+        {
+            label: "Leaf Spot",
+            data: [7, 9, 11, 13, 14, 16, 18, 17],
+            borderColor: "#9C27B0",
+            backgroundColor: "rgba(156, 39, 176, 0.2)",
+            tension: 0.4
+        }
+    ];
+
+    const monthlyDatasets = [
+        {
+            label: "Healthy",
+            data: [20, 22, 25, 28, 30, 35, 40, 38, 36, 32, 28, 25],
+            borderColor: "#4CAF50",
+            backgroundColor: "rgba(76, 175, 80, 0.2)",
+            tension: 0.4
+        },
+        {
+            label: "Early Blight",
+            data: [5, 7, 6, 10, 12, 15, 18, 16, 14, 12, 9, 7],
+            borderColor: "#FF9800",
+            backgroundColor: "rgba(255, 152, 0, 0.2)",
+            tension: 0.4
+        },
+        {
+            label: "Late Blight",
+            data: [3, 4, 5, 6, 8, 10, 12, 11, 9, 8, 6, 5],
+            borderColor: "#F44336",
+            backgroundColor: "rgba(244, 67, 54, 0.2)",
+            tension: 0.4
+        },
+        {
+            label: "Leaf Spot",
+            data: [4, 5, 7, 9, 10, 12, 14, 13, 11, 10, 8, 6],
+            borderColor: "#9C27B0",
+            backgroundColor: "rgba(156, 39, 176, 0.2)",
+            tension: 0.4
+        }
+    ];
+
+    function createChart(labels, datasets, titleText) {
+        if (chart) chart.destroy();
+
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: titleText
+                    }
+                }
+            }
+        });
+    }
+
+    function showYearly() {
+        createChart(years, yearlyDatasets, "Yearly Disease Comparison");
+    }
+
+    function showMonthly() {
+        createChart(months, monthlyDatasets, "Monthly Disease Comparison");
+    }
+
+    showYearly();
+</script>
+</body>
+</html>
