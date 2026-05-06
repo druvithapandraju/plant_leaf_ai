@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result | Druva Plant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="result-page">
+
+<!-- 🔍 SCAN OVERLAY -->
+<div id="scanOverlay" class="scan-overlay">
+    <img id="scanImg" src="">
+    <div class="scan-text">🔍 Scanning Image...</div>
+</div>
+
+<!-- ================= RESULT CONTENT ================= -->
+<div class="result-container" id="resultContent" style="display: none;">
+
+    <!-- TITLE -->
+    <h1 class="title">🌿 Detection Result</h1>
+
+    <!-- IMAGE SECTION -->
+    <div class="image-section">
+        <div class="image-row">
+
+            <!-- ORIGINAL -->
+            <div class="image-box">
+                <p><b>Original Image</b></p>
+                <img src="{{ original_image }}" class="result-image">
+            </div>
+
+            <!-- INFECTED WITH CIRCLES -->
+            <div class="image-box">
+                <p><b>Infected Area</b></p>
+
+                <div style="position: relative; display: inline-block;">
+                    <img id="infectedImg" src="{{ infected_image }}" class="result-image infected">
+
+                    <!-- Canvas Overlay -->
+                    <canvas id="infectedCanvas"
+                            style="position:absolute; top:0; left:0;"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= DETAILS ================= -->
+    <div class="details-section">
+
+        <h2 class="plant-name">🌱 Plant: {{ plant_name }}</h2>
+
+        <h3 class="disease-name">🦠 Disease: {{ disease_name }}</h3>
+
+        <p class="confidence">
+            <strong>Confidence:</strong> {{ confidence }}%
+        </p>
+
+        <div class="info-box">
+            <h4>📖 Description</h4>
+            <p>{{ description }}</p>
+        </div>
+
+        <div class="info-box solution">
+            <h4>💊 Solution</h4>
+            <p>{{ solution }}</p>
+        </div>
+
+    </div>
+
+    <!-- ================= BUTTONS ================= -->
+    <div class="buttons">
+
+        <a href="/" class="scan-leaf-btn">📷 Scan Leaf</a>
+
+        <a href="/shop" class="scan-leaf-btn">🛒 View Products</a>
+
+    </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+
+// 🔍 SCAN ANIMATION
+function scanImage(imgSrc) {
+
+    const overlay = document.getElementById("scanOverlay");
+    const scanImg = document.getElementById("scanImg");
+
+    scanImg.src = imgSrc;
+
+    scanImg.onload = function() {
+
+        overlay.style.display = "flex";
+
+        setTimeout(() => {
+            document.querySelector(".scan-text").innerText = "🔄 Processing...";
+        }, 1200);
+
+        setTimeout(() => {
+            document.querySelector(".scan-text").innerText = "✅ Scan Complete";
+        }, 2200);
+
+        setTimeout(() => {
+            overlay.style.display = "none";
+            document.getElementById("resultContent").style.display = "block";
+
+            // Draw circles AFTER showing result
+            drawCircles();
+        }, 3000);
+    };
+}
+
+// 🎯 DRAW INFECTED CIRCLES
+function drawCircles() {
+
+    const canvas = document.getElementById("infectedCanvas");
+    const img = document.getElementById("infectedImg");
+    const ctx = canvas.getContext("2d");
+
+    const infectedSpots = {{ infected_spots | tojson | safe }};
+
+    canvas.width = img.clientWidth;
+    canvas.height = img.clientHeight;
+
+    canvas.style.width = img.clientWidth + "px";
+    canvas.style.height = img.clientHeight + "px";
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+
+    infectedSpots.forEach(spot => {
+        ctx.beginPath();
+        ctx.arc(spot.x, spot.y, spot.r || 25, 0, 2 * Math.PI);
+        ctx.stroke();
+    });
+}
+
+// 🚀 AUTO START
+window.onload = function() {
+    scanImage("{{ original_image }}");
+};
+
+</script>
+
+</body>
+</html>
