@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Druva Plant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<!-- CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+```
+
+</head>
+
+<body class="home-page bg-image">
+
+<!-- ================= HEADER ================= -->
+
+<header>
+    <h2>🌿 Druva Plant</h2>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/graph">Graph</a>
+        <a href="/shop">Shop</a>
+        <a href="/contact">Contact</a>
+    </nav>
+</header>
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+```
+<h1>🌿 Plant Disease Detection</h1>
+<p class="dark-subtitle">Hybrid AI Model</p>
+<h3>(ResNet + Capsule Network)</h3>
+
+<!-- INPUT ROW -->
+<div class="input-row">
+
+    <!-- DRAG -->
+    <div class="box">
+        <h3>📦 Drag & Drop</h3>
+        <div id="drop-area">Drop Image Here</div>
+    </div>
+
+    <!-- FILE SCAN -->
+    <form class="box" action="/predict_scan" method="post" enctype="multipart/form-data">
+        <h3>📁 Scan Image</h3>
+        <input type="file" name="file" accept="image/*" required>
+        <br><br>
+        <button type="submit">🔍 Predict</button>
+    </form>
+
+    <!-- CAMERA -->
+    <div class="box">
+        <h3>📷 Live Scan</h3>
+
+        <button type="button" onclick="startCamera()">Open Camera</button>
+
+        <video id="video" autoplay playsinline style="display:none;"></video>
+        <canvas id="canvas" style="display:none;"></canvas>
+
+        <form id="cameraForm" method="POST" action="/predict_camera">
+            <input type="hidden" name="image_data" id="image_data">
+        </form>
+
+        <br>
+        <button type="button" onclick="captureImage()" id="captureBtn" style="display:none;">
+            📷 Scan Leaf
+        </button>
+    </div>
+
+</div>
+
+<!-- SAMPLE DATA -->
+<h2 class="sample-title">📂 Sample Leaves</h2>
+
+<div class="dataset">
+
+    <div class="dataset-item" onclick="sendImage(this)">
+        <img src="{{ url_for('static', filename='samples/healthy_plant_leaf/000002.jpg') }}">
+        <p>Healthy</p>
+    </div>
+
+    <div class="dataset-item" onclick="sendImage(this)">
+        <img src="{{ url_for('static', filename='samples/leaf_early_blight/000001.jpg') }}">
+        <p>Early Blight</p>
+    </div>
+
+    <div class="dataset-item" onclick="sendImage(this)">
+        <img src="{{ url_for('static', filename='samples/leaf_late_blight/000004.jpg') }}">
+        <p>Late Blight</p>
+    </div>
+
+    <div class="dataset-item" onclick="sendImage(this)">
+        <img src="{{ url_for('static', filename='samples/leaf_powdery_mildew/000001.jpg') }}">
+        <p>Powdery Mildew</p>
+    </div>
+
+    <div class="dataset-item" onclick="sendImage(this)">
+        <img src="{{ url_for('static', filename='samples/leaf_rust_disease/000004.jpg') }}">
+        <p>Rust Disease</p>
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+// DRAG & DROP
+const dropArea = document.getElementById("drop-area");
+
+dropArea.addEventListener("dragover", e => e.preventDefault());
+
+dropArea.addEventListener("drop", e => {
+    e.preventDefault();
+
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/predict_drag", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(html => {
+        document.open();
+        document.write(html);
+        document.close();
+    })
+    .catch(() => alert("Error uploading image"));
+});
+
+
+// CAMERA
+function startCamera() {
+    const video = document.getElementById("video");
+    const btn = document.getElementById("captureBtn");
+
+    video.style.display = "block";
+    btn.style.display = "inline-block";
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => video.srcObject = stream)
+        .catch(() => alert("Camera permission denied"));
+}
+
+function captureImage() {
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+
+    const data = canvas.toDataURL("image/png");
+
+    document.getElementById("image_data").value = data;
+    document.getElementById("cameraForm").submit();
+}
+
+
+// SAMPLE CLICK
+function sendImage(el) {
+    const imgSrc = el.querySelector("img").src;
+
+    fetch(imgSrc)
+    .then(res => res.blob())
+    .then(blob => {
+        const file = new File([blob], "sample.jpg", { type: blob.type });
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        return fetch("/predict_drag", {
+            method: "POST",
+            body: formData
+        });
+    })
+    .then(res => res.text())
+    .then(html => {
+        document.open();
+        document.write(html);
+        document.close();
+    })
+    .catch(() => alert("Error loading sample image"));
+}
+
+</script>
+
+</body>
+</html>
