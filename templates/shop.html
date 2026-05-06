@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop | Druva Plant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="shop-page">
+
+<!-- HEADER -->
+<div class="shop-header">
+    <h1>🌿 Plant Care Shop</h1>
+    <p>Buy medicines and tools for your plants</p>
+</div>
+
+<!-- AI RECOMMENDATION -->
+{% if disease and medicine_link %}
+<div class="recommend-box">
+    <h2>🧠 Recommended for: {{ disease }}</h2>
+    <a href="{{ medicine_link }}" target="_blank" class="btn">Buy Medicine</a>
+</div>
+{% endif %}
+
+<!-- PRODUCTS -->
+<div class="products">
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>Organic Fertilizer</h3>
+            <p>Boost plant growth naturally</p>
+            <a href="https://www.amazon.in/s?k=organic+fertilizer+for+plants" target="_blank" class="btn">Buy</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>Natural Pesticide</h3>
+            <p>Protect plants from pests</p>
+            <a href="https://www.amazon.in/s?k=plant+pesticide+organic" target="_blank" class="btn">Buy</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>Hybrid Seeds</h3>
+            <p>High yield seeds</p>
+            <a href="https://www.amazon.in/s?k=hybrid+seeds+plants" target="_blank" class="btn">Buy</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62?auto=format&fit=crop&w=800&q=80">
+        <div class="card-content">
+            <h3>Garden Tools Kit</h3>
+            <p>All-in-one gardening tools</p>
+            <a href="https://www.amazon.in/s?k=garden+tools+kit" target="_blank" class="btn">Buy</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- BACK BUTTON -->
+<div class="center-btn">
+    <a href="/" class="home-btn">🏠 Back to Home</a>
+</div>
+
+</body>
+</html>
