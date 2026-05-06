@@ -1,0 +1,479 @@
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* =========================
+   BODY BASE
+========================= */
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================
+   PAGE BACKGROUNDS
+========================= */
+body.home-page {
+    background: url("/static/images/bg.png") no-repeat center center/cover;
+    color: #fff;
+}
+
+body.about-page,
+body.graph-page {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+}
+
+body.shop-page {
+    background: #f4f7f6;
+    color: #222;
+}
+
+body.result-page {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+/* =========================
+   HEADER (COMMON)
+========================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+}
+
+header h2 {
+    color: #38bdf8;
+}
+
+header nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+header nav a:hover {
+    color: #a5d6a7;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+/* =========================
+   TITLES
+========================= */
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+.dark-subtitle {
+    color: #c8e6c9;
+}
+
+/* =========================
+   INPUT BOXES (HOME)
+========================= */
+.input-row {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.box {
+    width: 260px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.box:hover {
+    transform: translateY(-6px);
+}
+
+.box h3 {
+    color: #a5d6a7;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+button, .btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(45deg, #2e7d32, #66bb6a);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #1b5e20, #43a047);
+}
+
+/* =========================
+   DRAG AREA
+========================= */
+#drop-area {
+    border: 2px dashed #a5d6a7;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* =========================
+   CAMERA VIDEO
+========================= */
+video {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* =========================
+   SAMPLE LEAVES
+========================= */
+.dataset {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.dataset-item {
+    width: 150px;
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dataset-item:hover {
+    transform: scale(1.05);
+}
+
+.dataset-item img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.dataset-item p {
+    margin-top: 6px;
+}
+
+/* =========================
+   ABOUT PAGE
+========================= */
+.about-box {
+    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+/* =========================
+   GRAPH PAGE
+========================= */
+.graph-box {
+    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 12px;
+}
+
+/* =========================
+   SHOP PAGE PROFESSIONAL FIX
+========================= */
+
+/* Page background */
+body.shop-page {
+    background: #f4f6f5;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header section */
+.shop-header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #2e7d32, #66bb6a);
+    color: white;
+    border-radius: 0 0 20px 20px;
+}
+
+.shop-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.shop-header p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Products container */
+.products {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* Product cards */
+.card {
+    width: 260px;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* Image */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Card content */
+.card-content {
+    padding: 15px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Buy button */
+.buy-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 18px;
+    background: #2e7d32;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: #1b5e20;
+    transform: scale(1.05);
+}
+
+/* Back button */
+.center-btn {
+    text-align: center;
+    margin: 40px 0;
+}
+/* =========================
+   FINAL SHOP CARD FIX
+========================= */
+
+.products {
+    max-width: 1200px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* FIXED CARD */
+.card {
+    width: 260px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* REMOVE OVERLAP ISSUE */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+/* CLEAN CONTENT */
+.card-content {
+    padding: 18px;
+    background: #fff;
+}
+
+/* TITLE */
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+    color: #222;
+}
+
+/* DESCRIPTION */
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* BUTTON */
+.buy-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #2e7d32;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: #1b5e20;
+    transform: scale(1.05);
+}
+
+/* HOVER EFFECT */
+.card:hover {
+    transform: translateY(-10px);
+}
+.center-btn {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.home-btn {
+    padding: 10px 20px;
+    background: #1976d2;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+}
+/* =========================
+   RESULT PAGE
+========================= */
+.result-container {
+    width: 90%;
+    max-width: 900px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+}
+
+.image-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.result-image {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #fff;
+}
+
+.result-image.infected {
+    border: 4px solid red;
+    box-shadow: 0 0 15px red;
+}
+
+.info-box {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.15);
+}
+
+.scan-btn {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #ff9800, #ff5722);
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+
+    .input-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box {
+        width: 90%;
+    }
+
+    .image-row {
+        flex-direction: column;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
