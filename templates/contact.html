@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About | Plant Disease Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <body class="about-page">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: #2e7d32;
+        }
+
+        header {
+            background: #1b5e20;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 22px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .features {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .features li {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #43a047;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #2e7d32;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+            background: #1b5e20;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>🌿 PlantCare AI</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>About This Project</h2>
+        <p>
+            This Plant Disease Detection system uses Deep Learning to identify plant diseases from leaf images. 
+            Farmers and gardeners can simply upload an image and get instant predictions.
+        </p>
+        <p>
+            The system is built using technologies like <b>Flask</b>, <b>OpenCV</b>, and <b>TensorFlow/Keras</b>. 
+            It helps in early detection of diseases, improving crop yield and reducing losses.
+        </p>
+
+        <h2>How It Works</h2>
+        <p>
+            1. Upload a leaf image <br>
+            2. The model processes the image <br>
+            3. It predicts the disease class <br>
+            4. Results are shown instantly
+        </p>
+
+        <h2>Features</h2>
+        <ul class="features">
+            <li>✔ Upload plant leaf images</li>
+            <li>✔ AI-based disease detection</li>
+            <li>✔ Fast and accurate results</li>
+            <li>✔ User-friendly interface</li>
+        </ul>
+
+        <!-- Back Button -->
+        <a href="/" class="btn">⬅ Back to Home</a>
+    </div>
+</body>
+</html>
